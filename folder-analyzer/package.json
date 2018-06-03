@@ -1,0 +1,20 @@
+{
+  "name": "folder-analyzer",
+  "version": "0.0.1",
+  "description": "Analyzing this files in folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateenmohsin/coding-challenges.git"
+  },
+  "author": "mateen.mohsin@hotmail.com",
+  "license": "ISC",
+  "homepage": "https://github.com/mateenmohsin/coding-challenges#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "path": "^0.12.7"
+  }
+}
