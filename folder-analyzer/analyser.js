@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require('path');
 const fs = require('fs');
 
 
@@ -103,6 +103,10 @@ function updateFileCounter(filename, fileStatus){
 
 function analyzingDir(startPath){
 
+    
+    
+  try{  
+    
     const files = fs.readdirSync(startPath);        //reading the files in that directory.
     let filename = null;
     let fileStatus = null;
@@ -122,6 +126,14 @@ function analyzingDir(startPath){
             updateFileCounter(filename, fileStatus);        //else if its a file, update file counter is called
         };
     });
+    
+    
+    }
+    catch(error){
+        console.log("Note: Please give the Read Permission to this directory structure,\nor try with the user who has Read Permission to this directory structure!");
+        process.exit();
+}
+    
 };
 
 
@@ -137,12 +149,16 @@ function run(currentPath){
     analyzingDir(currentPath);                          //calling analyzing method
     const endTime =new Date().getTime();                //getting end time of analyzing
 
+    //==Displaying output==//
+    
     console.log("\nProcess Time in millisecond: ",endTime-startTime);
     console.log(`Found ${totalFiles} files in ${currentPath} within ${dir} folders of size ${convertBytesToMb(dirSize)}mb with`);
 
     Object.keys(results).forEach((key) => {
         console.log(`${findPercentage(results[key].count,totalFiles)}% ${key} of size ${convertBytesToMb(results[key].size)}mb (${results[key].count} files)`);
     });
+    
+    //====================//
 }
 
 //==End of Main Method RUN ==//
