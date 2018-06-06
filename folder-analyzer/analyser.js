@@ -7,6 +7,7 @@ const fs = require('fs');
 let totalFiles = 0;
 let dir = 0;
 let dirSize = 0;
+let checkDirCount = 0;
 const mbConst = 1048576;
 
 const results = {
@@ -107,6 +108,7 @@ function analyzingDir(startPath){
     
   try{  
     
+      checkDirCount++;
     const files = fs.readdirSync(startPath);        //reading the files in that directory.
     let filename = null;
     let fileStatus = null;
@@ -130,8 +132,15 @@ function analyzingDir(startPath){
     
     }
     catch(error){
-        console.log("Note: Please give the Read Permission to this directory structure,\nor try with the user who has Read Permission to this directory structure!");
-        process.exit();
+        
+        if(checkDirCount > 1){
+        dir--;
+        console.log("\nPermission to this Directory Structure is denied : "+error.path);
+    }
+        else{
+            console.log("Note: Please give the Read Permission to this directory structure,\nor try with the user who has Read Permission to this directory structure!");
+            process.exit();
+        }
 }
     
 };
